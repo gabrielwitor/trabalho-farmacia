@@ -31,3 +31,6 @@ Lista* OrdenaListaValor (Lista* p);
 
 /* Ordena Lista pela data de vencimento do medicamento */
 Lista* OrdenaListaVencimento (Lista* p);
+
+/* Lê o arquivo TAD*/
+int LerArquivo();

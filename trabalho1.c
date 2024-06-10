@@ -1,8 +1,8 @@
-#include "estoque.h"
 #include <stdio.h>
+#include "estoque.h"
 
 int main(void){
-    printf("Oi.\n");
+    LerArquivo();
     
     return 0;
 }

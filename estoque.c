@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "estoque.h"
 
 struct medicamento{
@@ -47,4 +48,54 @@ Lista * OrdenaListaValor (Lista* p ){
 
 Lista * OrdenaListaVencimento (Lista* p ){
     
+}
+
+int LerArquivo(){ 
+    FILE * arquivo;
+
+    arquivo = fopen("entrada.txt","r");
+
+    if(arquivo == NULL){
+        printf("O arquivo \"entrada.txt\" não existe.");
+        return 1;
+    }
+
+    if(fgetc(arquivo) == EOF){
+        printf("O arquivo está vazio.");
+    }
+
+    rewind(arquivo);
+
+    char frase[255];
+
+    while(1){
+        if(feof(arquivo)){
+            break;
+        }
+        fscanf(arquivo,"%s",frase);
+
+        printf("%s\n",frase);
+        if(!strcmp(frase,"MEDICAMENTO")){
+            fgets(frase,255,arquivo);
+            printf("teste: %s",frase);
+            
+        } else if(!strcmp(frase,"RETIRA")){
+
+        } else if(!strcmp(frase,"IMPRIME_LISTA")){
+
+        } else if(!strcmp(frase,"ATUALIZA_PRECO")){
+
+        } else if(!strcmp(frase,"VERIFICA_VALIDADE")){
+
+        } else if(!strcmp(frase,"VERIFICA_LISTA")){
+
+        } else if(!strcmp(frase,"ORDENA_LISTA_VALIDADE")){
+
+        } else if(!strcmp(frase,"FIM")){
+
+        } 
+    }
+
+
+    return 0;
 }

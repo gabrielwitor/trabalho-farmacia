@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "estoque.h": "c",
-        "stdio.h": "c"
-    },
-    "C_Cpp.default.compilerPath": "/usr/bin/gcc"
-}
