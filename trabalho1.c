@@ -31,54 +31,68 @@ int main(int argc, char *argv[]){
         fscanf(arquivo_leitura,"%s",palavra_lida);
         printf("Palavra lida: %s\n",palavra_lida);
 
-        if(ReconhecerPalavra(palavra_lida) == 1){ // Leitura: MEDICAMENTO 
+        switch (ReconhecerPalavra(palavra_lida)){
+            
+            case 1: // Leitura: MEDICAMENTO 
 
-            fscanf(arquivo_leitura,"%s %d %f %d %d %d",nome, &codigo, &valor, &data_de_validade[0], &data_de_validade[1], &data_de_validade[2]);
-            Medicamento* medicamento_lido = CriaMedicamento(abreArquivoEscrita(argv[2]), nome, codigo, valor, data_de_validade);
-            lista_medicamentos = InsereListaMedicamento(lista_medicamentos,medicamento_lido);
+                fscanf(arquivo_leitura,"%s %d %f %d %d %d",nome, &codigo, &valor, &data_de_validade[0], &data_de_validade[1], &data_de_validade[2]);
+                Medicamento* medicamento_lido = CriaMedicamento(abreArquivoEscrita(argv[2]), nome, codigo, valor, data_de_validade);
+                lista_medicamentos = InsereListaMedicamento(lista_medicamentos,medicamento_lido);
 
-            LeMedicamento(medicamento_lido); //TODO: Remover isso depois
+                LeMedicamento(medicamento_lido); //TODO: Remover isso depois
+                break;
 
-        } else if(ReconhecerPalavra(palavra_lida) == 2){ // Leitura: RETIRA
+            case 2: // Leitura: RETIRA
 
-            fscanf(arquivo_leitura,"%d",&codigo);
-            lista_medicamentos = RetiraListaMedicamento(abreArquivoEscrita(argv[2]),lista_medicamentos,codigo);
+                fscanf(arquivo_leitura,"%d",&codigo);
+                lista_medicamentos = RetiraListaMedicamento(abreArquivoEscrita(argv[2]),lista_medicamentos,codigo);
+                break;
 
-        } else if(ReconhecerPalavra(palavra_lida) == 3){ // Leitura: IMPRIME_LISTA
+            case 3: // Leitura: IMPRIME_LISTA
 
-            ImprimeListaMedicamentos(abreArquivoEscrita(argv[2]), lista_medicamentos);
+                ImprimeListaMedicamentos(abreArquivoEscrita(argv[2]), lista_medicamentos);
+                break;
 
-        } else if(ReconhecerPalavra(palavra_lida) == 4){ // Leitura: ATUALIZA_PRECO
+            case 4: // Leitura: ATUALIZA_PRECO
 
-            fscanf(arquivo_leitura,"%d %f", &codigo, &valor);
-            AtualizaPrecoMedicamento(abreArquivoEscrita(argv[2]), lista_medicamentos, codigo, valor);
+                fscanf(arquivo_leitura,"%d %f", &codigo, &valor);
+                AtualizaPrecoMedicamento(abreArquivoEscrita(argv[2]), lista_medicamentos, codigo, valor);
+                break;
 
-        } else if(ReconhecerPalavra(palavra_lida) == 5){ // Leitura: VERIFICA_VALIDADE
+            case 5: // Leitura: VERIFICA_VALIDADE
 
-            fscanf(arquivo_leitura,"%d %d %d", &data_de_validade[0], &data_de_validade[1], &data_de_validade[2]);
-            if(!VerificaListaValidade(abreArquivoEscrita(argv[2]),lista_medicamentos,data_de_validade)){
-                FILE* arquivo_escrita = abreArquivoEscrita(argv[2]);
-                fprintf(arquivo_escrita,"MEDICAMENTO VENCIDO NAO ENCONTRADO NA LISTA\n");
-                fclose(arquivo_escrita);
-            }
+                fscanf(arquivo_leitura,"%d %d %d", &data_de_validade[0], &data_de_validade[1], &data_de_validade[2]);
+                if(!VerificaListaValidade(abreArquivoEscrita(argv[2]),lista_medicamentos,data_de_validade)){
+                    FILE* arquivo_escrita = abreArquivoEscrita(argv[2]);
+                    fprintf(arquivo_escrita,"MEDICAMENTO VENCIDO NAO ENCONTRADO NA LISTA\n");
+                    fclose(arquivo_escrita);
+                }
+                break;
 
-        } else if(ReconhecerPalavra(palavra_lida) == 6){ // Leitura: VERIFICA_LISTA
+            case 6: // Leitura: VERIFICA_LISTA
 
-            fscanf(arquivo_leitura,"%d", &codigo);
-            VerificaListaMedicamento(abreArquivoEscrita(argv[2]), lista_medicamentos, codigo);
+                fscanf(arquivo_leitura,"%d", &codigo);
+                VerificaListaMedicamento(abreArquivoEscrita(argv[2]), lista_medicamentos, codigo);
+                break;
 
-        } else if(ReconhecerPalavra(palavra_lida) == 7){ // Leitura: ORDENA_LISTA_VALOR
+            case 7: // Leitura: ORDENA_LISTA_VALOR
 
-            lista_medicamentos = OrdenaListaValor(lista_medicamentos);
+                lista_medicamentos = OrdenaListaValor(lista_medicamentos);
+                break;
 
-        } else if(ReconhecerPalavra(palavra_lida) == 8){ // Leitura: ORDENA_LISTA_VALIDADE
+            case 8: // Leitura: ORDENA_LISTA_VALIDADE
 
-            lista_medicamentos = OrdenaListaVencimento(lista_medicamentos);
+                lista_medicamentos = OrdenaListaVencimento(lista_medicamentos);
+                break;
+
+            default:
+
+                break;
         }
 
     } while (ReconhecerPalavra(palavra_lida) != 9);
 
-
+    LiberaLista(lista_medicamentos);
     
     return 0;
 }
