@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
     FILE* arquivo_leitura = abreArquivoLeitura(argv[1]);
 
     if(arquivo_leitura == NULL){
-        printf("Houve um erro na leitura do arquivo \"%s\".",argv[1]);
+        printf("Houve um erro na leitura do arquivo \"%s\".\n",argv[1]);
         return 0;
     }
 
@@ -86,7 +86,6 @@ int main(int argc, char *argv[]){
                 break;
 
             default:
-
                 break;
         }
 

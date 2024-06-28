@@ -7,12 +7,12 @@ FILE* abreArquivoLeitura(char* caminho){
     arquivo = fopen(caminho,"r");
 
     if(arquivo == NULL){
-        printf("O arquivo \"%s\" não foi encontrado.",caminho);
+        printf("O arquivo \"%s\" não foi encontrado.\n",caminho);
         return NULL;
     }
 
     if(fgetc(arquivo) == EOF){
-        printf("O arquivo \"%s\" está vazio.",caminho);
+        printf("O arquivo \"%s\" está vazio.\n",caminho);
         return NULL;
     }
 
