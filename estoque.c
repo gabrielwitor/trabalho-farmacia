@@ -172,32 +172,17 @@ Lista * OrdenaListaVencimento (Lista* p ){
 
     for(Lista* aux = p; aux != NULL; aux = aux->prox){
         for(Lista* aux2 = aux->prox; aux2 != NULL; aux2 = aux2->prox){
-            if(aux->m->data[2] > aux2->m->data[2]){ //Ordenando pelo ano
-            temp = aux->m;
-            aux->m = aux2->m;
-            aux2->m = temp;
+            if(aux->m->data[2] > aux2->m->data[2] || 
+            (aux->m->data[2] == aux2->m->data[2] && aux->m->data[1] > aux2->m->data[1]) || 
+            (aux->m->data[2] == aux2->m->data[2] && aux->m->data[1] == aux2->m->data[1] && aux->m->data[0] > aux2->m->data[0])){
+
+                temp = aux->m;
+                aux->m = aux2->m;
+                aux2->m = temp;
+                
             }
         }
     }
 
-    for(Lista* aux = p; aux != NULL; aux = aux->prox){
-        for(Lista* aux2 = aux->prox; aux2 != NULL; aux2 = aux2->prox){
-            if(aux->m->data[2] >= aux2->m->data[2] && aux->m->data[1] > aux2->m->data[1]){ //Ordenando pelo mês
-            temp = aux->m;
-            aux->m = aux2->m;
-            aux2->m = temp;
-            }
-        }
-    }
-
-    for(Lista* aux = p; aux != NULL; aux = aux->prox){
-        for(Lista* aux2 = aux->prox; aux2 != NULL; aux2 = aux2->prox){
-            if(aux->m->data[2] >= aux2->m->data[2] && aux->m->data[1] >= aux2->m->data[1] && aux->m->data[0] > aux2->m->data[0]){ //Ordenando pelo dia
-            temp = aux->m;
-            aux->m = aux2->m;
-            aux2->m = temp;
-            }
-        }
-    }
     return p;
 }
